@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/entity/game.dart';
+import 'package:ggame/entity/game.dart';
 
 class ItemScreenshots extends StatelessWidget {
   final Game game;
 
-  const ItemScreenshots({Key key, this.game}) : super(key: key);
+  const ItemScreenshots({Key? key, required this.game}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ItemScreenshots extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        listScreenshots.isNotEmpty
+        listScreenshots!.isNotEmpty
             ? SizedBox(
                 height: 200,
                 child: ListView.builder(
@@ -28,6 +28,7 @@ class ItemScreenshots extends StatelessWidget {
                     itemCount: listScreenshots.length,
                     itemBuilder: (context, i) {
                       var screenshots = listScreenshots[i];
+                      var image = screenshots.image;
                       return Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: Card(
@@ -35,7 +36,7 @@ class ItemScreenshots extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8)),
                             child: ClipPath(
-                              child: Image.network(screenshots.image),
+                              child: image!.isNotEmpty ? Image.network(image) : Container(),
                               clipper: ShapeBorderClipper(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8))),

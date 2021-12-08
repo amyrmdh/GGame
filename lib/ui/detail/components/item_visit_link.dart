@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/entity/game.dart';
-import 'package:ggame_project/utils/color_util.dart';
+import 'package:ggame/entity/game.dart';
+import 'package:ggame/utils/color_util.dart';
 import 'package:linkwell/linkwell.dart';
 
 class ItemVisitLink extends StatelessWidget {
 
   final Game game;
 
-  const ItemVisitLink({ Key key, this.game }) : super(key: key);
+  const ItemVisitLink({ Key? key, required this.game }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

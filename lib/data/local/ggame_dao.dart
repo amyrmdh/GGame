@@ -1,5 +1,5 @@
 import 'package:floor/floor.dart';
-import 'package:ggame_project/entity/favorite.dart';
+import 'package:ggame/entity/favorite.dart';
 
 @dao
 abstract class GGameDao {
@@ -10,11 +10,8 @@ abstract class GGameDao {
   @insert
   Future<void> insertQrcode(Favorite favorite);
 
-  // @Query('SELECT EXISTS(SELECT * FROM ggame WHERE gameId = :gameId)')
-  // Future<bool> isGameFavorite(int gameId);
-
-  @Query('SELECT * FROM ggame WHERE id = :id')
-  Stream<Favorite> favoriteById(int id);
+  @Query('SELECT EXISTS(SELECT * FROM ggame WHERE gameId = :gameId)')
+  Future<bool> isGameFavorite(int gameId);
 
   @Query('DELETE FROM ggame WHERE id = :id')
   Future<void> deleteFavoriteById(int id);

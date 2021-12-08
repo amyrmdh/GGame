@@ -1,9 +1,8 @@
-import 'package:ggame_project/entity/game.dart';
-
+import 'package:ggame/entity/game.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static ApiService _instance;
+  static ApiService? _instance;
   static const baseUrl = 'https://www.freetogame.com/api/';
 
   factory ApiService() => _instance ?? ApiService._internal();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ggame_project/entity/game.dart';
-import 'package:ggame_project/utils/color_util.dart';
+import 'package:ggame/entity/game.dart';
+import 'package:ggame/utils/color_util.dart';
 
 class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
@@ -23,9 +23,9 @@ class DetailSliverDelegate extends SliverPersistentHeaderDelegate {
       child: Stack(
         children: <Widget>[
           Hero(
-            tag: game.thumbnail,
+            tag: game.thumbnail ?? "-",
             child: Image.network(
-              game.thumbnail,
+              game.thumbnail ?? ColorUtil.background(),
               width: MediaQuery.of(context).size.width,
               height: expandedHeight,
               fit: BoxFit.cover,

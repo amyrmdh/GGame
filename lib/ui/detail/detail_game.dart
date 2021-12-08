@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/data/network/api_service.dart';
-import 'package:ggame_project/entity/game.dart';
-import 'package:ggame_project/ui/detail/components/body_detail.dart';
-import 'package:ggame_project/utils/color_util.dart';
+import 'package:ggame/data/network/api_service.dart';
+import 'package:ggame/entity/game.dart';
+import 'package:ggame/utils/color_util.dart';
+
+import 'components/body_detail.dart';
 
 class DetailGame extends StatefulWidget {
   final int gameDetail;
 
-  const DetailGame({Key key, this.gameDetail}) : super(key: key);
+  const DetailGame({Key? key, required this.gameDetail}) : super(key: key);
 
   @override
   _DetailGameState createState() => _DetailGameState();
@@ -15,12 +16,12 @@ class DetailGame extends StatefulWidget {
 
 class _DetailGameState extends State<DetailGame> {
   final ApiService _apiService = ApiService();
-  Future<Game> _futureGameDetail;
+  late Future<Game> _futureGameDetail;
 
   @override
   void initState() {
     super.initState();
-    var id = widget.gameDetail == null || widget.gameDetail < 1 ? 1 : widget.gameDetail;
+    var id = widget.gameDetail < 1 ? 1 : widget.gameDetail;
     _futureGameDetail = _apiService.getDetailGame(id);
   }
 
@@ -46,7 +47,7 @@ class _DetailGameState extends State<DetailGame> {
               );
             } else {
               var game = snapshot.data;
-              return BodyDetail(game: game);
+              return BodyDetail(game: game!,);
             }
           }
         },

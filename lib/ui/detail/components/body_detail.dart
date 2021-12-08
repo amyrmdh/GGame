@@ -1,21 +1,20 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:ggame_project/entity/game.dart';
-import 'package:ggame_project/ui/detail/components/item_additional.dart';
-import 'package:ggame_project/ui/detail/components/item_desc.dart';
-import 'package:ggame_project/ui/detail/components/item_requirements.dart';
-import 'package:ggame_project/ui/detail/components/item_screenshots.dart';
-import 'package:ggame_project/utils/app_route.dart';
-import 'package:ggame_project/utils/color_util.dart';
+import 'package:ggame/entity/game.dart';
+import 'package:ggame/utils/color_util.dart';
 
 import 'detail_sliver_delegate.dart';
+import 'item_additional.dart';
+import 'item_desc.dart';
+import 'item_requirements.dart';
+import 'item_screenshots.dart';
 import 'item_visit_link.dart';
 
 class BodyDetail extends StatefulWidget {
   final Game game;
 
-  const BodyDetail({Key key, this.game}) : super(key: key);
+  const BodyDetail({Key? key, required this.game}) : super(key: key);
 
   @override
   _BodyDetailState createState() => _BodyDetailState();
@@ -64,7 +63,7 @@ class _BodyDetailState extends State<BodyDetail> {
               )
             ],
           ),
-          _toolbar(context, isGotoBottom, widget.game.title),
+          _toolbar(context, isGotoBottom, widget.game.title ?? "-"),
         ],
       ),
     );
@@ -81,7 +80,7 @@ Widget _bodyDetail(Game game) {
           children: [
             Center(
               child: Text(
-                game.title,
+                game.title ?? "-",
                 style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -91,7 +90,7 @@ Widget _bodyDetail(Game game) {
             const SizedBox(
               height: 30,
             ),
-            Text(game.shortDescription,
+            Text(game.shortDescription ?? "-",
                 style: TextStyle(fontSize: 16, color: ColorUtil.textPrimary())),
             const SizedBox(
               height: 20,

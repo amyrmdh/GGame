@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/entity/game.dart';
-import 'package:ggame_project/utils/color_util.dart';
+import 'package:ggame/entity/game.dart';
+import 'package:ggame/utils/color_util.dart';
 
 class ItemDesc extends StatefulWidget {
   final Game game;
 
-  const ItemDesc({Key key, this.game}) : super(key: key);
+  const ItemDesc({Key? key, required this.game}) : super(key: key);
 
   @override
   _ItemDescState createState() => _ItemDescState();
@@ -28,7 +28,7 @@ class _ItemDescState extends State<ItemDesc> {
         const SizedBox(
           height: 20,
         ),
-        Text(game.description,
+        Text(game.description ?? "-",
             overflow: isReadMore ? TextOverflow.ellipsis : TextOverflow.visible,
             maxLines: isReadMore ? 5 : null,
             style: TextStyle(fontSize: 16, color: ColorUtil.textPrimary())),

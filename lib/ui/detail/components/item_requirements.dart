@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/entity/game.dart';
-import 'package:ggame_project/entity/info.dart';
-import 'package:ggame_project/entity/min_system.dart';
-import 'package:ggame_project/utils/color_util.dart';
+import 'package:ggame/entity/game.dart';
+import 'package:ggame/entity/info.dart';
+import 'package:ggame/entity/min_system.dart';
+import 'package:ggame/utils/color_util.dart';
 
 class ItemRequirements extends StatelessWidget {
   final Game game;
 
-  const ItemRequirements({Key key, this.game}) : super(key: key);
+  const ItemRequirements({Key? key, required this.game}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +30,17 @@ class ItemRequirements extends StatelessWidget {
               crossAxisCount: 2,
               childAspectRatio: 1.5,
               mainAxisSpacing: 10,
-              children: _itemRequire(game.minimumSystemRequirements)
+              children: _itemRequire(game.minimumSystemRequirements ?? MinimumSystemRequirements())
                   .map((e) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            e.title,
+                            e.title ?? "-",
                             style: TextStyle(
                                 color: ColorUtil.textSecondary(), fontSize: 14),
                           ),
                           Text(
-                            e.desc,
+                            e.desc ?? "-",
                             style: TextStyle(
                                 color: ColorUtil.textPrimary(), fontSize: 16),
                           ),

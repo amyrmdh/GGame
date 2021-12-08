@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:ggame_project/entity/screenshots.dart';
 import 'package:intl/intl.dart';
 
 import 'min_system.dart';
+import 'screenshots.dart';
 
 Game gameFromJson(String str) => Game.fromJson(json.decode(str));
 
@@ -11,23 +11,23 @@ String gameToJson(Game data) => json.encode(data.toJson());
 
 class Game {
   int id;
-  String title;
-  String thumbnail;
-  String status;
-  String shortDescription;
-  String description;
-  String gameUrl;
-  String genre;
-  String platform;
-  String publisher;
-  String developer;
-  DateTime releaseDate;
-  String freetogameProfileUrl;
-  MinimumSystemRequirements minimumSystemRequirements;
-  List<Screenshot> screenshots;
+  String? title;
+  String? thumbnail;
+  String? status;
+  String? shortDescription;
+  String? description;
+  String? gameUrl;
+  String? genre;
+  String? platform;
+  String? publisher;
+  String? developer;
+  DateTime? releaseDate;
+  String? freetogameProfileUrl;
+  MinimumSystemRequirements? minimumSystemRequirements;
+  List<Screenshot>? screenshots;
 
   Game({
-    this.id,
+    required this.id,
     this.title,
     this.thumbnail,
     this.status,
@@ -77,14 +77,15 @@ class Game {
         "publisher": publisher,
         "developer": developer,
         "release_date":
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
+            "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate?.day.toString().padLeft(2, '0')}",
         "freetogame_profile_url": freetogameProfileUrl,
-        "minimum_system_requirements": minimumSystemRequirements.toJson(),
-        "screenshots": List<dynamic>.from(screenshots.map((x) => x.toJson())),
+        "minimum_system_requirements": minimumSystemRequirements!.toJson(),
+        "screenshots": List<dynamic>.from(screenshots!.map((x) => x.toJson())),
       };
 
-  String toReleaseDate(String format) {
-    return DateFormat(format == null || format.isEmpty ? 'MMMM yyyy' : format).format(releaseDate);
+  String toReleaseDate(String? format) {
+    return DateFormat(format!.isEmpty ? 'MMMM yyyy' : format)
+        .format(releaseDate!);
   }
 
   @override

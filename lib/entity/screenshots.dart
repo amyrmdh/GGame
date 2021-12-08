@@ -1,6 +1,6 @@
 class Screenshot {
-  int id;
-  String image;
+  int? id;
+  String? image;
 
   Screenshot({
     this.id,
