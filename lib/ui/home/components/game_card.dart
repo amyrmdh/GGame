@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/utils/color_util.dart';
+import 'package:ggame/utils/color_util.dart';
 
 import '../../../size_config.dart';
 
@@ -9,10 +9,10 @@ class GameCard extends StatelessWidget {
   final GestureTapCallback press;
 
   const GameCard({
-    Key key,
-    this.image,
-    this.name,
-    this.press,
+    Key? key,
+    required this.image,
+    required this.name,
+    required this.press,
   }) : super(key: key);
 
   @override
@@ -103,8 +103,8 @@ class GenreTitile extends StatelessWidget {
   final String text;
 
   const GenreTitile({
-    Key key,
-    this.text,
+    Key? key,
+    required this.text,
   }) : super(key: key);
 
   @override

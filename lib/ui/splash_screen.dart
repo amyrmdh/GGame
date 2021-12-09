@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:ggame/ui/detail/detail_game.dart';
 import 'package:ggame/utils/app_route.dart';
 import 'package:ggame/utils/color_util.dart';
-
-import 'detail/detail_game.dart';
+import 'home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,10 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      //AppRoute.clearTopTo(const HomeScreen());
-      AppRoute.clearTopTo(const DetailGame(
-        gameDetail: 23,
-      ));
+      AppRoute.clearTopTo(const DetailGame(gameDetail: 2));
     });
     super.initState();
   }

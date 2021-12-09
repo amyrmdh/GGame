@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/size_config.dart';
 
+import '../../../size_config.dart';
 import 'content.dart';
 import 'home_header.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key key}) : super(key: key);
+  const Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +19,6 @@ class Body extends StatelessWidget {
             Content(
               platformName: 'Windows',
             ),
-            Content(
-              platformName: 'Linux',
-            ),
-            Content(
-              platformName: 'VT',
-            )
           ],
         ),
       ),

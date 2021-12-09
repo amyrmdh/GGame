@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/size_config.dart';
+import 'package:ggame/size_config.dart';
 
 class SectionTitle extends StatelessWidget {
   final String text;
   final GestureTapCallback press;
 
   const SectionTitle({
-    Key key,
-    @required this.text,
-    @required this.press,
+    Key? key,
+    required this.text,
+    required this.press,
   }) : super(key: key);
 
   @override

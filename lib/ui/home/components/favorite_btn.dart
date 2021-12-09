@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FavoriteBtn extends StatelessWidget {
   const FavoriteBtn({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

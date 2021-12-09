@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ggame_project/ui/home/components/section_title.dart';
+import 'package:ggame/ui/home/components/section_title.dart';
 
 import '../../../size_config.dart';
 import 'game_card.dart';
@@ -8,8 +8,8 @@ class Content extends StatelessWidget {
   final String platformName;
 
   const Content({
-    Key key,
-    this.platformName,
+    Key? key,
+    required this.platformName,
   }) : super(key: key);
 
   @override
