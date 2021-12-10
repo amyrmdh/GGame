@@ -1,4 +1,5 @@
 import 'package:ggame/entity/game.dart';
+import 'package:ggame/entity/game_list.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -9,6 +10,15 @@ class ApiService {
 
   ApiService._internal() {
     _instance = this;
+  }
+
+  Future<List<GameList>> getListGame(String platform) async {
+    Uri url = Uri.parse('${baseUrl}games?platform=${platform.toLowerCase()}');
+    final response = await http.get(url);
+
+    return response.statusCode == 200
+        ? listGameFromJson(response.body)
+        : throw Exception('Failed to load list game');
   }
 
   Future<Game> getDetailGame(int id) async {

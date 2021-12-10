@@ -36,7 +36,9 @@ class ItemScreenshots extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8)),
                             child: ClipPath(
-                              child: image!.isNotEmpty ? Image.network(image) : Container(),
+                              child: image!.isNotEmpty
+                                  ? Image.network(image)
+                                  : Container(),
                               clipper: ShapeBorderClipper(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8))),

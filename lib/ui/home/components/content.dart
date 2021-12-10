@@ -1,56 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:ggame/data/network/api_service.dart';
+import 'package:ggame/entity/game_list.dart';
+import 'package:ggame/ui/home/components/game_card.dart';
 import 'package:ggame/ui/home/components/section_title.dart';
+import 'package:ggame/utils/str_util.dart';
 
 import '../../../size_config.dart';
-import 'game_card.dart';
 
-class Content extends StatelessWidget {
-  final String platformName;
+class ContentPc extends StatefulWidget {
+  final String platform;
+  const ContentPc({Key? key, required this.platform}) : super(key: key);
 
-  const Content({
-    Key? key,
-    required this.platformName,
-  }) : super(key: key);
+  @override
+  _ContentPcState createState() => _ContentPcState();
+}
+
+class _ContentPcState extends State<ContentPc> {
+  final ApiService _apiService = ApiService();
+  late Future<List<GameList>> _futureGame;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureGame = _apiService.getListGame(widget.platform);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SectionTitle(
-          text: platformName,
-          press: () {},
-        ),
-        SizedBox(height: getProportionateScreenHeight(20.0)),
-        SingleChildScrollView(
-          clipBehavior: Clip.none,
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              GameCard(
-                image:
-                    'https://lh3.googleusercontent.com/c6t2SbBvzX7fziAV-Xa3ZFG4MPECY5Vjv25wHyMcWJqhErLl9_Y1TSkWUWHeRCqgoQutsQW2BAr4CrSqZy1jAXHF=w640-h400-e365-rj-sc0x00ffffff',
-                name: 'Azure Lane Re-Creator List Blabkasu',
-                press: () {},
+    return FutureBuilder<List<GameList>>(
+        future: _futureGame,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Text(
+                'Terjadi Kesalahan',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 20.0,
+                ),
               ),
-              GameCard(
-                image:
-                    'https://lh3.googleusercontent.com/c6t2SbBvzX7fziAV-Xa3ZFG4MPECY5Vjv25wHyMcWJqhErLl9_Y1TSkWUWHeRCqgoQutsQW2BAr4CrSqZy1jAXHF=w640-h400-e365-rj-sc0x00ffffff',
-                name: 'Azure Lane',
-                press: () {},
-              ),
-              GameCard(
-                image:
-                    'https://lh3.googleusercontent.com/c6t2SbBvzX7fziAV-Xa3ZFG4MPECY5Vjv25wHyMcWJqhErLl9_Y1TSkWUWHeRCqgoQutsQW2BAr4CrSqZy1jAXHF=w640-h400-e365-rj-sc0x00ffffff',
-                name: 'Azure Lane',
-                press: () {},
-              ),
-              SizedBox(
-                width: getProportionateScreenWidth(20),
-              )
-            ],
-          ),
-        ),
-      ],
-    );
+            );
+          } else {
+            return Column(
+              children: [
+                SectionTitle(
+                  text: (widget.platform == 'pc')
+                      ? widget.platform.toUpperCase()
+                      : StringUtil.capitalize(widget.platform),
+                  press: () {},
+                ),
+                SizedBox(height: getProportionateScreenHeight(20.0)),
+                SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 7,
+                    itemBuilder: (context, index) {
+                      GameList game = snapshot.data![index];
+                      return GameCard(
+                        game: game,
+                        press: () {},
+                      );
+                    },
+                  ),
+                )
+              ],
+            );
+          }
+        });
   }
 }

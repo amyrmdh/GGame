@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:ggame/entity/game_list.dart';
 import 'package:ggame/utils/color_util.dart';
 
 import '../../../size_config.dart';
 
 class GameCard extends StatelessWidget {
-  final String image;
-  final String name;
+  final GameList game;
   final GestureTapCallback press;
 
   const GameCard({
     Key? key,
-    required this.image,
-    required this.name,
+    required this.game,
     required this.press,
   }) : super(key: key);
 
@@ -46,14 +45,14 @@ class GameCard extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15.0),
                       child: Image.network(
-                        image,
+                        game.thumbnail ?? '',
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   SizedBox(height: getProportionateScreenHeight(8)),
                   Text(
-                    "Azure Lane",
+                    game.title ?? '',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -63,27 +62,19 @@ class GameCard extends StatelessWidget {
                     maxLines: 2,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      GenreTitile(text: 'Adventurer'),
-                      GenreTitile(text: 'Adventurer'),
-                      GenreTitile(text: 'Adventurer'),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GenreTitile(text: 'Adventurer'),
-                      GenreTitile(text: 'Adventurer'),
-                      GenreTitile(text: 'Adventurer'),
+                      GenreTitile(game: game),
+                      SizedBox(width: getProportionateScreenWidth(10)),
+                      GenreTitile(game: game),
                     ],
                   ),
                 ],
               ),
               Align(
-                alignment: Alignment(-0.65, 0.55),
+                alignment: Alignment(0.0, 0.3),
                 child: Text(
-                  "Release: 2021-09-09",
+                  game.releaseDate.toString(),
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
@@ -100,11 +91,11 @@ class GameCard extends StatelessWidget {
 }
 
 class GenreTitile extends StatelessWidget {
-  final String text;
+  final GameList game;
 
   const GenreTitile({
     Key? key,
-    required this.text,
+    required this.game,
   }) : super(key: key);
 
   @override
@@ -120,7 +111,7 @@ class GenreTitile extends StatelessWidget {
         width: getProportionateScreenWidth(30),
         height: getProportionateScreenHeight(13),
         child: Text(
-          text,
+          game.genre ?? '',
           style: TextStyle(
             color: Colors.white,
             fontSize: getProportionateScreenWidth(5),

@@ -58,10 +58,14 @@ class Game {
         developer: json["developer"],
         releaseDate: DateTime.parse(json["release_date"]),
         freetogameProfileUrl: json["freetogame_profile_url"],
-        minimumSystemRequirements: MinimumSystemRequirements.fromJson(
-            json["minimum_system_requirements"]),
-        screenshots: List<Screenshot>.from(
-            json["screenshots"].map((x) => Screenshot.fromJson(x))),
+        minimumSystemRequirements: json["freetogame_profile_url"] != null
+            ? MinimumSystemRequirements.fromJson(
+                json["minimum_system_requirements"])
+            : MinimumSystemRequirements(),
+        screenshots: json["screenshots"] != null
+            ? List<Screenshot>.from(
+                json["screenshots"].map((x) => Screenshot.fromJson(x)))
+            : List.empty(),
       );
 
   Map<String, dynamic> toJson() => {
