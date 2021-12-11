@@ -63,8 +63,10 @@ class Game {
             ? MinimumSystemRequirements.fromJson(
                 json["minimum_system_requirements"])
             : MinimumSystemRequirements(),
-        screenshots: json["screenshots"] != null ? List<Screenshot>.from(
-            json["screenshots"].map((x) => Screenshot.fromJson(x))) : List.empty(),
+        screenshots: json["screenshots"] != null
+            ? List<Screenshot>.from(
+                json["screenshots"].map((x) => Screenshot.fromJson(x)))
+            : List.empty(),
       );
 
   String toReleaseDate({String? format}) =>

@@ -99,6 +99,9 @@ Widget _bodyDetail(Game game) {
             ItemAdditional(
               game: game,
             ),
+            const SizedBox(
+              height: 20,
+            ),
             ItemDesc(game: game),
             ItemScreenshots(game: game),
             ItemRequirements(

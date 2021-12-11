@@ -25,12 +25,13 @@ class ItemRequirements extends StatelessWidget {
         SizedBox(
           height: 350,
           child: GridView.count(
-              physics: const BouncingScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 2,
               childAspectRatio: 1.5,
               mainAxisSpacing: 10,
-              children: _itemRequire(game.minimumSystemRequirements ?? MinimumSystemRequirements())
+              children: _itemRequire(game.minimumSystemRequirements ??
+                      MinimumSystemRequirements())
                   .map((e) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
