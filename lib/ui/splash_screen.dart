@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ggame/ui/detail/detail_game.dart';
 import 'package:ggame/utils/app_route.dart';
 import 'package:ggame/utils/color_util.dart';
 import 'home/home_screen.dart';

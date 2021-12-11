@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ggame/entity/game_list.dart';
+import 'package:ggame/entity/game.dart';
 import 'package:ggame/utils/color_util.dart';
 
 import '../../../size_config.dart';
 
 class GameCard extends StatelessWidget {
-  final GameList game;
+  final Game game;
   final GestureTapCallback press;
 
   const GameCard({
@@ -21,7 +21,7 @@ class GameCard extends StatelessWidget {
       padding: const EdgeInsets.only(left: 20.0),
       child: GestureDetector(
         onTap: press,
-        child: Container(
+        child: SizedBox(
           width: getProportionateScreenWidth(115.0),
           height: getProportionateScreenHeight(165.0),
           child: Stack(
@@ -72,9 +72,9 @@ class GameCard extends StatelessWidget {
                 ],
               ),
               Align(
-                alignment: Alignment(0.0, 0.3),
+                alignment: const Alignment(0.0, 0.3),
                 child: Text(
-                  game.releaseDate.toString(),
+                  game.toReleaseDate(format: "EEEE, dd MMMM yyyy"),
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
@@ -91,7 +91,7 @@ class GameCard extends StatelessWidget {
 }
 
 class GenreTitile extends StatelessWidget {
-  final GameList game;
+  final Game game;
 
   const GenreTitile({
     Key? key,

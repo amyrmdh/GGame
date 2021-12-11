@@ -20,11 +20,11 @@ class _BodyState extends State<Body> {
         child: Column(
           children: [
             SizedBox(height: getProportionateScreenHeight(25.0)),
-            HomeHeader(),
+            const HomeHeader(),
             SizedBox(height: getProportionateScreenHeight(25.0)),
-            ContentPc(platform: 'pc'),
-            ContentPc(platform: 'browser'),
-            ContentPc(platform: 'all'),
+            const ContentPc(platform: 'all'),
+            const ContentPc(platform: 'browser'),
+            const ContentPc(platform: 'pc'),
           ],
         ),
       ),

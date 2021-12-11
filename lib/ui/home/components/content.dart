@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ggame/data/network/api_service.dart';
-import 'package:ggame/entity/game_list.dart';
+import 'package:ggame/entity/game.dart';
+import 'package:ggame/ui/detail/detail_game.dart';
 import 'package:ggame/ui/home/components/game_card.dart';
 import 'package:ggame/ui/home/components/section_title.dart';
+import 'package:ggame/utils/app_route.dart';
 import 'package:ggame/utils/str_util.dart';
 
 import '../../../size_config.dart';
@@ -17,7 +19,7 @@ class ContentPc extends StatefulWidget {
 
 class _ContentPcState extends State<ContentPc> {
   final ApiService _apiService = ApiService();
-  late Future<List<GameList>> _futureGame;
+  late Future<List<Game>> _futureGame;
 
   @override
   void initState() {
@@ -27,7 +29,7 @@ class _ContentPcState extends State<ContentPc> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<GameList>>(
+    return FutureBuilder<List<Game>>(
         future: _futureGame,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -58,10 +60,10 @@ class _ContentPcState extends State<ContentPc> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 7,
                     itemBuilder: (context, index) {
-                      GameList game = snapshot.data![index];
+                      Game game = snapshot.data![index];
                       return GameCard(
                         game: game,
-                        press: () {},
+                        press: () => AppRoute.to(DetailGame(gameDetail: game.id)),
                       );
                     },
                   ),

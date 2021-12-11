@@ -41,7 +41,7 @@ class HomeHeader extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: const [
               SearchField(),
               FavoriteBtn(),
             ],

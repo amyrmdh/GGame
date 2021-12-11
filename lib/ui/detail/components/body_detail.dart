@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ggame/entity/game.dart';
+import 'package:ggame/utils/app_route.dart';
 import 'package:ggame/utils/color_util.dart';
 
 import 'detail_sliver_delegate.dart';
@@ -122,8 +123,7 @@ Widget _toolbar(BuildContext context, bool isGotoBottom, String title) {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              // Todo Uncomment this
-              // AppRoute.back();
+              AppRoute.back();
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(

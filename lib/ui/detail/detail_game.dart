@@ -25,6 +25,7 @@ class _DetailGameState extends State<DetailGame> {
     _futureGameDetail = _apiService.getDetailGame(id);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 
 import 'ggame_dao.dart';
 
-// part 'database.g.dart';
+part 'database.g.dart';
 
 @Database(version: 1, entities: [Favorite])
 abstract class GGameDatabse extends FloorDatabase {

@@ -41,7 +41,7 @@ class ItemAdditional extends StatelessWidget {
 
 List<Info> _itemList(Game game) {
   return [
-    Info(title: "Release Date", desc: game.toReleaseDate(null)),
+    Info(title: "Release Date", desc: game.toReleaseDate()),
     Info(title: "Genre", desc: game.genre),
     Info(title: "Platform", desc: game.platform),
     Info(title: "Status", desc: game.status),

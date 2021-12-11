@@ -7,7 +7,8 @@ import 'screenshots.dart';
 
 Game gameFromJson(String str) => Game.fromJson(json.decode(str));
 
-String gameToJson(Game data) => json.encode(data.toJson());
+List<Game> listGameFromJson(String str) =>
+    List<Game>.from(json.decode(str).map((x) => Game.fromJson(x)));
 
 class Game {
   int id;
@@ -58,39 +59,16 @@ class Game {
         developer: json["developer"],
         releaseDate: DateTime.parse(json["release_date"]),
         freetogameProfileUrl: json["freetogame_profile_url"],
-        minimumSystemRequirements: json["freetogame_profile_url"] != null
+        minimumSystemRequirements: json["minimum_system_requirements"] != null
             ? MinimumSystemRequirements.fromJson(
                 json["minimum_system_requirements"])
             : MinimumSystemRequirements(),
-        screenshots: json["screenshots"] != null
-            ? List<Screenshot>.from(
-                json["screenshots"].map((x) => Screenshot.fromJson(x)))
-            : List.empty(),
+        screenshots: json["screenshots"] != null ? List<Screenshot>.from(
+            json["screenshots"].map((x) => Screenshot.fromJson(x))) : List.empty(),
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "thumbnail": thumbnail,
-        "status": status,
-        "short_description": shortDescription,
-        "description": description,
-        "game_url": gameUrl,
-        "genre": genre,
-        "platform": platform,
-        "publisher": publisher,
-        "developer": developer,
-        "release_date":
-            "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate?.day.toString().padLeft(2, '0')}",
-        "freetogame_profile_url": freetogameProfileUrl,
-        "minimum_system_requirements": minimumSystemRequirements!.toJson(),
-        "screenshots": List<dynamic>.from(screenshots!.map((x) => x.toJson())),
-      };
-
-  String toReleaseDate(String? format) {
-    return DateFormat(format!.isEmpty ? 'MMMM yyyy' : format)
-        .format(releaseDate!);
-  }
+  String toReleaseDate({String? format}) =>
+      DateFormat(format ?? 'MMMM yyyy').format(releaseDate!);
 
   @override
   String toString() {
