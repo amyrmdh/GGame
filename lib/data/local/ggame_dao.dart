@@ -8,11 +8,11 @@ abstract class GGameDao {
   Future<List<Favorite>> getAllFavorite();
 
   @insert
-  Future<void> insertQrcode(Favorite favorite);
+  Future<void> insertGame(Favorite favorite);
 
-  @Query('SELECT EXISTS(SELECT * FROM ggame WHERE gameId = :gameId)')
-  Future<bool?> isGameFavorite(int gameId);
+  @Query('SELECT * FROM ggame WHERE gameId = :gameId')
+  Future<Favorite?> getFavoriteById(int gameId);
 
-  @Query('DELETE FROM ggame WHERE id = :id')
-  Future<void> deleteFavoriteById(int id);
+  @Query('DELETE FROM ggame WHERE gameId = :gameId')
+  Future<void> deleteFavoriteById(int gameId);
 }

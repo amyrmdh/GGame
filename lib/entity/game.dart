@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:intl/intl.dart';
 
+import 'favorite.dart';
 import 'min_system.dart';
 import 'screenshots.dart';
 
@@ -69,6 +70,8 @@ class Game {
 
   String toReleaseDate({String? format}) =>
       DateFormat(format ?? 'MMMM yyyy').format(releaseDate!);
+
+  Favorite toFavorite() => Favorite(gameId: id, title: title, thumbnail: thumbnail);    
 
   @override
   String toString() {

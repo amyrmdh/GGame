@@ -1,0 +1,1 @@
+const ggameDb = 'ggame.db';

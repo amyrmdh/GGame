@@ -82,7 +82,7 @@ class _$GGameDatabse extends GGameDatabse {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `ggame` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `gameId` INTEGER NOT NULL, `title` TEXT, `thumbnail` TEXT)');
+            'CREATE TABLE IF NOT EXISTS `ggame` (`gameId` INTEGER NOT NULL, `title` TEXT, `thumbnail` TEXT, PRIMARY KEY (`gameId`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -103,7 +103,6 @@ class _$GGameDao extends GGameDao {
             database,
             'ggame',
             (Favorite item) => <String, Object?>{
-                  'id': item.id,
                   'gameId': item.gameId,
                   'title': item.title,
                   'thumbnail': item.thumbnail
@@ -121,27 +120,29 @@ class _$GGameDao extends GGameDao {
   Future<List<Favorite>> getAllFavorite() async {
     return _queryAdapter.queryList('SELECT * FROM ggame',
         mapper: (Map<String, Object?> row) => Favorite(
-            id: row['id'] as int?,
             gameId: row['gameId'] as int,
             title: row['title'] as String?,
             thumbnail: row['thumbnail'] as String?));
   }
 
   @override
-  Future<bool?> isGameFavorite(int gameId) async {
-    await _queryAdapter.queryNoReturn(
-        'SELECT EXISTS(SELECT * FROM ggame WHERE gameId = ?1)',
+  Future<Favorite?> getFavoriteById(int gameId) async {
+    return _queryAdapter.query('SELECT * FROM ggame WHERE gameId = ?1',
+        mapper: (Map<String, Object?> row) => Favorite(
+            gameId: row['gameId'] as int,
+            title: row['title'] as String?,
+            thumbnail: row['thumbnail'] as String?),
         arguments: [gameId]);
   }
 
   @override
-  Future<void> deleteFavoriteById(int id) async {
-    await _queryAdapter
-        .queryNoReturn('DELETE FROM ggame WHERE id = ?1', arguments: [id]);
+  Future<void> deleteFavoriteById(int gameId) async {
+    await _queryAdapter.queryNoReturn('DELETE FROM ggame WHERE gameId = ?1',
+        arguments: [gameId]);
   }
 
   @override
-  Future<void> insertQrcode(Favorite favorite) async {
+  Future<void> insertGame(Favorite favorite) async {
     await _favoriteInsertionAdapter.insert(favorite, OnConflictStrategy.abort);
   }
 }

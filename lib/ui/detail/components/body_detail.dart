@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ggame/entity/game.dart';
+import 'package:ggame/ui/detail/components/btn_favorite_detail.dart';
 import 'package:ggame/utils/app_route.dart';
 import 'package:ggame/utils/color_util.dart';
 
@@ -45,6 +46,7 @@ class _BodyDetailState extends State<BodyDetail> {
 
   @override
   Widget build(BuildContext context) {
+    Game game = widget.game;
     return Scaffold(
       backgroundColor: ColorUtil.background(),
       body: Stack(
@@ -55,16 +57,16 @@ class _BodyDetailState extends State<BodyDetail> {
               SliverPersistentHeader(
                 delegate: DetailSliverDelegate(
                   expandedHeight,
-                  widget.game,
+                  game,
                   roundedContainerHeight,
                 ),
               ),
               SliverToBoxAdapter(
-                child: _bodyDetail(widget.game),
+                child: _bodyDetail(game),
               )
             ],
           ),
-          _toolbar(context, isGotoBottom, widget.game.title ?? "-"),
+          _toolbar(context, isGotoBottom, game),
         ],
       ),
     );
@@ -110,7 +112,8 @@ Widget _bodyDetail(Game game) {
       ));
 }
 
-Widget _toolbar(BuildContext context, bool isGotoBottom, String title) {
+Widget _toolbar(BuildContext context, bool isGotoBottom, Game game) {
+  var title = game.title ?? "-";
   return Padding(
     padding: EdgeInsets.only(
       top: MediaQuery.of(context).padding.top,
@@ -153,24 +156,8 @@ Widget _toolbar(BuildContext context, bool isGotoBottom, String title) {
                           fontSize: 24)),
                 ))
               : Container(),
-          GestureDetector(
-            onTap: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text('Update Soon')));
-            },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 15,
-              ),
-              child: CircleAvatar(
-                backgroundColor: Colors.black26,
-                radius: 16,
-                child: Icon(
-                  Icons.favorite_border,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+          BtnFavoriteDetail(
+            game: game,
           ),
         ],
       ),
