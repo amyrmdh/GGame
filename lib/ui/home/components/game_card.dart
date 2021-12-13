@@ -17,63 +17,51 @@ class GameCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Padding(
-      padding: const EdgeInsets.only(left: 20.0),
-      child: GestureDetector(
-        onTap: press,
-        child: SizedBox(
-          width: getProportionateScreenWidth(115.0),
-          height: getProportionateScreenHeight(165.0),
-          child: Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: ColorUtil.backgroundSec(),
-                  borderRadius: BorderRadius.circular(15.0),
+    return GestureDetector(
+      onTap: press,
+      child: SizedBox(
+        width: getProportionateScreenWidth(170.0),
+        height: getProportionateScreenHeight(0.0),
+        child: Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: ColorUtil.backgroundSec(),
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              width: getProportionateScreenWidth(170.0),
+              height: getProportionateScreenHeight(110.0),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: getProportionateScreenWidth(127.5),
+                  height: getProportionateScreenHeight(68.75),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Image.network(
+                      game.thumbnail ?? '',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                width: getProportionateScreenWidth(115.0),
-                height: getProportionateScreenHeight(110.0),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: getProportionateScreenWidth(76.6),
-                    height: getProportionateScreenHeight(55.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15.0),
-                      child: Image.network(
-                        game.thumbnail ?? '',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                SizedBox(height: getProportionateScreenHeight(8)),
+                Text(
+                  game.title ?? '',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: getProportionateScreenWidth(11),
                   ),
-                  SizedBox(height: getProportionateScreenHeight(8)),
-                  Text(
-                    game.title ?? '',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontSize: getProportionateScreenWidth(11),
-                    ),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GenreTitile(game: game),
-                      SizedBox(width: getProportionateScreenWidth(10)),
-                      GenreTitile(game: game),
-                    ],
-                  ),
-                ],
-              ),
-              Align(
-                alignment: const Alignment(0.0, 0.3),
-                child: Text(
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                ),
+                GenreTitle(genre: game.genre),
+                SizedBox(height: getProportionateScreenHeight(8)),
+                Text(
                   game.toReleaseDate(format: "EEEE, dd MMMM yyyy"),
                   style: TextStyle(
                     color: Colors.white,
@@ -81,21 +69,21 @@ class GameCard extends StatelessWidget {
                     fontSize: getProportionateScreenWidth(8),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class GenreTitile extends StatelessWidget {
-  final Game game;
+class GenreTitle extends StatelessWidget {
+  final String? genre;
 
-  const GenreTitile({
+  const GenreTitle({
     Key? key,
-    required this.game,
+    this.genre,
   }) : super(key: key);
 
   @override
@@ -108,13 +96,13 @@ class GenreTitile extends StatelessWidget {
           color: ColorUtil.genreColor(),
           borderRadius: BorderRadius.circular(15.0),
         ),
-        width: getProportionateScreenWidth(30),
+        width: getProportionateScreenWidth(35),
         height: getProportionateScreenHeight(13),
         child: Text(
-          game.genre ?? '',
+          genre ?? '',
           style: TextStyle(
-            color: Colors.white,
-            fontSize: getProportionateScreenWidth(5),
+            color: Colors.black,
+            fontSize: getProportionateScreenWidth(6),
           ),
         ),
       ),

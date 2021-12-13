@@ -9,15 +9,15 @@ import 'package:ggame/utils/str_util.dart';
 
 import '../../../size_config.dart';
 
-class ContentPc extends StatefulWidget {
+class Content extends StatefulWidget {
   final String platform;
-  const ContentPc({Key? key, required this.platform}) : super(key: key);
+  const Content({Key? key, required this.platform}) : super(key: key);
 
   @override
   _ContentPcState createState() => _ContentPcState();
 }
 
-class _ContentPcState extends State<ContentPc> {
+class _ContentPcState extends State<Content> {
   final ApiService _apiService = ApiService();
   late Future<List<Game>> _futureGame;
 
@@ -35,12 +35,12 @@ class _ContentPcState extends State<ContentPc> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else if (snapshot.hasError) {
-            return const Center(
+            return Center(
               child: Text(
                 'Terjadi Kesalahan',
                 style: TextStyle(
                   color: Colors.red,
-                  fontSize: 20.0,
+                  fontSize: getProportionateScreenWidth(20.0),
                 ),
               ),
             );
@@ -51,23 +51,34 @@ class _ContentPcState extends State<ContentPc> {
                   text: (widget.platform == 'pc')
                       ? widget.platform.toUpperCase()
                       : StringUtil.capitalize(widget.platform),
-                  press: () {},
+                  press: () {
+                    // To do
+                  },
                 ),
                 SizedBox(height: getProportionateScreenHeight(20.0)),
                 SizedBox(
                   height: 200,
-                  child: ListView.builder(
+                  child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 7,
+                    padding: EdgeInsets.only(
+                      left: getProportionateScreenWidth(20.0),
+                      right: getProportionateScreenWidth(20.0),
+                    ),
                     itemBuilder: (context, index) {
                       Game game = snapshot.data![index];
                       return GameCard(
                         game: game,
-                        press: () => AppRoute.to(DetailGame(gameDetail: game.id)),
+                        press: () => AppRoute.to(
+                          DetailGame(gameDetail: game.id),
+                        ),
                       );
                     },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(width: getProportionateScreenWidth(20));
+                    },
+                    itemCount: 7,
                   ),
-                )
+                ),
               ],
             );
           }
