@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     ]);
     return ScreenUtilInit(
       builder: () => MaterialApp(
-        home: const HomeScreen(),
+        home: const SplashScreen(),
         navigatorKey: AppRoute.navigatorKey,
         debugShowCheckedModeBanner: false,
         scrollBehavior: CustomScrollBehavior(),
