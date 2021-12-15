@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ggame/entity/game.dart';
 import 'package:ggame/ui/detail/components/btn_favorite_detail.dart';
 import 'package:ggame/utils/app_route.dart';
@@ -23,8 +24,8 @@ class BodyDetail extends StatefulWidget {
 }
 
 class _BodyDetailState extends State<BodyDetail> {
-  final double expandedHeight = 300;
-  final double roundedContainerHeight = 30;
+  final double expandedHeight = 300.0.h;
+  final double roundedContainerHeight = 30.0.h;
   final _controller = ScrollController();
   var isGotoBottom = false;
 
@@ -75,44 +76,55 @@ class _BodyDetailState extends State<BodyDetail> {
 
 Widget _bodyDetail(Game game) {
   return Container(
-      color: ColorUtil.background(),
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Text(
-                game.title ?? "-",
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24),
+    color: ColorUtil.background(),
+    child: Padding(
+      padding: EdgeInsets.only(
+        bottom: 16.0.h,
+        left: 16.0.w,
+        right: 16.0.w,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Text(
+              game.title ?? "-",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 24.0.sp,
               ),
             ),
-            const SizedBox(
-              height: 30,
+          ),
+          SizedBox(
+            height: 20.0.h,
+          ),
+          Text(
+            game.shortDescription ?? "-",
+            style: TextStyle(
+              fontSize: 14.0.h,
+              color: ColorUtil.textPrimary(),
             ),
-            Text(game.shortDescription ?? "-",
-                style: TextStyle(fontSize: 16, color: ColorUtil.textPrimary())),
-            const SizedBox(
-              height: 20,
-            ),
-            ItemAdditional(
-              game: game,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ItemDesc(game: game),
-            ItemScreenshots(game: game),
-            ItemRequirements(
-              game: game,
-            ),
-            ItemVisitLink(game: game)
-          ],
-        ),
-      ));
+          ),
+          SizedBox(
+            height: 18.0.h,
+          ),
+          ItemAdditional(
+            game: game,
+          ),
+          SizedBox(
+            height: 18.0.h,
+          ),
+          ItemDesc(game: game),
+          ItemScreenshots(game: game),
+          ItemRequirements(
+            game: game,
+          ),
+          ItemVisitLink(game: game)
+        ],
+      ),
+    ),
+  );
 }
 
 Widget _toolbar(BuildContext context, bool isGotoBottom, Game game) {
@@ -131,14 +143,12 @@ Widget _toolbar(BuildContext context, bool isGotoBottom, Game game) {
             onTap: () {
               AppRoute.back();
             },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 15,
-              ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0.w),
               child: CircleAvatar(
                 backgroundColor: Colors.black26,
-                radius: 16,
-                child: Icon(
+                radius: 16.0.r,
+                child: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                 ),
@@ -148,16 +158,18 @@ Widget _toolbar(BuildContext context, bool isGotoBottom, Game game) {
           isGotoBottom
               ? Flexible(
                   child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                  ),
-                  child: Text(title.isNotEmpty ? title : "",
+                    padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                    child: Text(
+                      title.isNotEmpty ? title : "",
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24)),
-                ))
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0.sp,
+                      ),
+                    ),
+                  ),
+                )
               : Container(),
           BtnFavoriteDetail(
             game: game,

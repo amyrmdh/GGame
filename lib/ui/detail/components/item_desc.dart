@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ggame/entity/game.dart';
 import 'package:ggame/utils/color_util.dart';
 
@@ -22,22 +23,36 @@ class _ItemDescState extends State<ItemDesc> {
       children: [
         Text(
           "About ${game.title}",
-          style: const TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0.sp,
+          ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: 18.0.h,
         ),
-        Text(game.description ?? "-",
-            overflow: isReadMore ? TextOverflow.ellipsis : TextOverflow.visible,
-            maxLines: isReadMore ? 5 : null,
-            style: TextStyle(fontSize: 16, color: ColorUtil.textPrimary())),
+        Text(
+          game.description ?? "-",
+          overflow: isReadMore ? TextOverflow.ellipsis : TextOverflow.visible,
+          maxLines: isReadMore ? 5 : null,
+          style: TextStyle(
+            fontSize: 14.0.sp,
+            color: ColorUtil.textPrimary(),
+          ),
+        ),
         GestureDetector(
-            onTap: () => _onReadMore(),
-            child: Text(isReadMore ? "Show More" : "Show Less",
-                style: const TextStyle(color: Colors.blue, fontSize: 14))),
-        const SizedBox(
-          height: 20,
+          onTap: () => _onReadMore(),
+          child: Text(
+            isReadMore ? "Show More" : "Show Less",
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 14.0.sp,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 18.0.sp,
         )
       ],
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ggame/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({
@@ -14,17 +14,16 @@ class SearchField extends StatelessWidget {
         borderRadius: BorderRadius.circular(25.0),
       ),
       width: MediaQuery.of(context).size.width * 0.7,
-      height: 40.0,
+      height: 35.0.h,
       child: TextField(
         decoration: InputDecoration(
           hintText: 'Search thousands of games',
           hintStyle: TextStyle(
             color: const Color(0xFF7B7C7D),
-            fontSize: getProportionateScreenWidth(12),
+            fontSize: 11.0.h,
           ),
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 0.0,
-            vertical: 15.0,
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 14.0.h,
           ),
           prefixIcon: const Icon(
             Icons.search,

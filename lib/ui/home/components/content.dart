@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ggame/data/network/api_service.dart';
 import 'package:ggame/entity/game.dart';
 import 'package:ggame/ui/detail/detail_game.dart';
@@ -7,11 +8,14 @@ import 'package:ggame/ui/home/components/section_title.dart';
 import 'package:ggame/utils/app_route.dart';
 import 'package:ggame/utils/str_util.dart';
 
-import '../../../size_config.dart';
-
 class Content extends StatefulWidget {
   final String platform;
-  const Content({Key? key, required this.platform}) : super(key: key);
+  final GestureTapCallback press;
+  const Content({
+    Key? key,
+    required this.platform,
+    required this.press,
+  }) : super(key: key);
 
   @override
   _ContentPcState createState() => _ContentPcState();
@@ -33,14 +37,14 @@ class _ContentPcState extends State<Content> {
         future: _futureGame,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(
               child: Text(
                 'Terjadi Kesalahan',
                 style: TextStyle(
                   color: Colors.red,
-                  fontSize: getProportionateScreenWidth(20.0),
+                  fontSize: 20.0.sp,
                 ),
               ),
             );
@@ -51,19 +55,13 @@ class _ContentPcState extends State<Content> {
                   text: (widget.platform == 'pc')
                       ? widget.platform.toUpperCase()
                       : StringUtil.capitalize(widget.platform),
-                  press: () {
-                    // To do
-                  },
+                  press: widget.press,
                 ),
-                SizedBox(height: getProportionateScreenHeight(20.0)),
+                SizedBox(height: 15.0.h),
                 SizedBox(
-                  height: 200,
+                  height: 170.0.h,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.only(
-                      left: getProportionateScreenWidth(20.0),
-                      right: getProportionateScreenWidth(20.0),
-                    ),
                     itemBuilder: (context, index) {
                       Game game = snapshot.data![index];
                       return GameCard(
@@ -74,7 +72,7 @@ class _ContentPcState extends State<Content> {
                       );
                     },
                     separatorBuilder: (context, index) {
-                      return SizedBox(width: getProportionateScreenWidth(20));
+                      return SizedBox(width: 20.0.w);
                     },
                     itemCount: 7,
                   ),

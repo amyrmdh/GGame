@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ggame/data/network/api_service.dart';
 import 'package:ggame/entity/game.dart';
 import 'package:ggame/utils/color_util.dart';
@@ -25,7 +26,6 @@ class _DetailGameState extends State<DetailGame> {
     _futureGameDetail = _apiService.getDetailGame(id);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,18 +37,20 @@ class _DetailGameState extends State<DetailGame> {
             return const Center(child: CircularProgressIndicator());
           } else {
             if (snapshot.hasError) {
-              return const Center(
+              return Center(
                 child: Text(
                   "Terjadi Kesalahan",
                   style: TextStyle(
                       color: Colors.red,
-                      fontSize: 20,
+                      fontSize: 20.0.sp,
                       fontWeight: FontWeight.bold),
                 ),
               );
             } else {
               var game = snapshot.data;
-              return BodyDetail(game: game!,);
+              return BodyDetail(
+                game: game!,
+              );
             }
           }
         },

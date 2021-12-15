@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ggame/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SectionTitle extends StatelessWidget {
   final String text;
@@ -13,33 +13,28 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(20),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            text,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20.0.sp,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        GestureDetector(
+          onTap: press,
+          child: Text(
+            'See all',
             style: TextStyle(
               color: Colors.white,
-              fontSize: getProportionateScreenWidth(23),
-              fontWeight: FontWeight.bold,
+              fontSize: 14.0.sp,
             ),
           ),
-          GestureDetector(
-            onTap: press,
-            child: Text(
-              'See all',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: getProportionateScreenWidth(14),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

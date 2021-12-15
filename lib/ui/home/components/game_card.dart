@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ggame/entity/game.dart';
 import 'package:ggame/utils/color_util.dart';
 
@@ -20,53 +21,52 @@ class GameCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: SizedBox(
-        width: getProportionateScreenWidth(170.0),
-        height: getProportionateScreenHeight(0.0),
+        width: 170.0.w,
         child: Stack(
           alignment: AlignmentDirectional.center,
           children: [
             Container(
               decoration: BoxDecoration(
                 color: ColorUtil.backgroundSec(),
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.circular(15.0.r),
               ),
-              width: getProportionateScreenWidth(170.0),
-              height: getProportionateScreenHeight(110.0),
+              width: 170.0.w,
+              height: 110.0.h,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: getProportionateScreenWidth(127.5),
-                  height: getProportionateScreenHeight(68.75),
+                  width: 127.5.w,
+                  height: 68.75.h,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(15.0.r),
                     child: Image.network(
                       game.thumbnail ?? '',
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                SizedBox(height: getProportionateScreenHeight(8)),
+                SizedBox(height: 8.0.h),
                 Text(
                   game.title ?? '',
                   style: TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: getProportionateScreenWidth(11),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12.sp,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                 ),
                 GenreTitle(genre: game.genre),
-                SizedBox(height: getProportionateScreenHeight(8)),
+                SizedBox(height: 8.0.h),
                 Text(
                   game.toReleaseDate(format: "EEEE, dd MMMM yyyy"),
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
-                    fontSize: getProportionateScreenWidth(8),
+                    fontSize: 8.0.sp,
                   ),
                 ),
               ],
@@ -89,20 +89,20 @@ class GenreTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: EdgeInsets.only(top: 6.0.h),
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: ColorUtil.genreColor(),
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15.0.r),
         ),
-        width: getProportionateScreenWidth(35),
-        height: getProportionateScreenHeight(13),
+        width: 35.0.w,
+        height: 12.0.h,
         child: Text(
           genre ?? '',
           style: TextStyle(
             color: Colors.black,
-            fontSize: getProportionateScreenWidth(6),
+            fontSize: 6.0.sp,
           ),
         ),
       ),

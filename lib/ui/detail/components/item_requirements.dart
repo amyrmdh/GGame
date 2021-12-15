@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ggame/entity/game.dart';
 import 'package:ggame/entity/info.dart';
 import 'package:ggame/entity/min_system.dart';
@@ -14,41 +15,50 @@ class ItemRequirements extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           "Minimum System Requirements",
           style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
-        ),
-        const SizedBox(
-          height: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 16.0.sp,
+          ),
         ),
         SizedBox(
-          height: 350,
+          height: 18.0.h,
+        ),
+        SizedBox(
+          height: 350.0.h,
           child: GridView.count(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              crossAxisCount: 2,
-              childAspectRatio: 1.5,
-              mainAxisSpacing: 10,
-              children: _itemRequire(game.minimumSystemRequirements ??
-                      MinimumSystemRequirements())
-                  .map((e) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            e.title ?? "-",
-                            style: TextStyle(
-                                color: ColorUtil.textSecondary(), fontSize: 14),
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            crossAxisCount: 2,
+            childAspectRatio: 1.5,
+            mainAxisSpacing: 5.0.h,
+            children: _itemRequire(
+              game.minimumSystemRequirements ?? MinimumSystemRequirements(),
+            )
+                .map((e) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          e.title ?? "-",
+                          style: TextStyle(
+                            color: ColorUtil.textSecondary(),
+                            fontSize: 12.0.sp,
                           ),
-                          Text(
-                            e.desc ?? "-",
-                            style: TextStyle(
-                                color: ColorUtil.textPrimary(), fontSize: 16),
+                        ),
+                        Text(
+                          e.desc ?? "-",
+                          style: TextStyle(
+                            color: ColorUtil.textPrimary(),
+                            fontSize: 14.0.sp,
                           ),
-                        ],
-                      ))
-                  .toList()),
-        )
+                        ),
+                      ],
+                    ))
+                .toList(),
+          ),
+        ),
       ],
     );
   }
@@ -62,7 +72,8 @@ List<Info> _itemRequire(MinimumSystemRequirements sys) {
     Info(title: "Graphics", desc: sys.graphics),
     Info(title: "Storage", desc: sys.storage),
     Info(
-        title: "Additional Notes",
-        desc: "Specifications may change during development"),
+      title: "Additional Notes",
+      desc: "Specifications may change during development",
+    ),
   ];
 }

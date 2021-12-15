@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ggame/entity/game.dart';
 
 class ItemScreenshots extends StatelessWidget {
@@ -14,41 +15,49 @@ class ItemScreenshots extends StatelessWidget {
       children: [
         Text(
           "${game.title} Screenshots",
-          style: const TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 16.0.sp,
+          ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: 18.0.sp,
         ),
         listScreenshots!.isNotEmpty
             ? SizedBox(
-                height: 200,
+                height: 170.0.h,
                 child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: listScreenshots.length,
-                    itemBuilder: (context, i) {
-                      var screenshots = listScreenshots[i];
-                      var image = screenshots.image;
-                      return Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: Card(
-                            elevation: 6,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: listScreenshots.length,
+                  itemBuilder: (context, i) {
+                    var screenshots = listScreenshots[i];
+                    var image = screenshots.image;
+                    return Padding(
+                      padding: EdgeInsets.only(right: 8.0.w),
+                      child: Card(
+                        elevation: 6,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0.r),
+                        ),
+                        child: ClipPath(
+                          child: image!.isNotEmpty
+                              ? Image.network(image)
+                              : Container(),
+                          clipper: ShapeBorderClipper(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            child: ClipPath(
-                              child: image!.isNotEmpty
-                                  ? Image.network(image)
-                                  : Container(),
-                              clipper: ShapeBorderClipper(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8))),
+                              borderRadius: BorderRadius.circular(8.0.r),
                             ),
-                          ));
-                    }),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               )
             : Container(),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: 18.0.h,
         )
       ],
     );

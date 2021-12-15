@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ggame/ui/favorite/favorite_screen.dart';
 import 'package:ggame/utils/app_route.dart';
 
@@ -10,7 +11,7 @@ class FavoriteBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      iconSize: 35.0,
+      iconSize: 30.0.w,
       splashRadius: 1.0,
       onPressed: () => AppRoute.to(const FavoriteScreen()),
       icon: const Icon(

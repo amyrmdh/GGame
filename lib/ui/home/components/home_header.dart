@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'favorite_btn.dart';
 import 'search_field.dart';
 
@@ -9,45 +8,41 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Welcome, ',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: getProportionateScreenWidth(23),
-              fontWeight: FontWeight.w700,
-              fontFamily: 'Montserrat',
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Welcome, ',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24.0.sp,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Montserrat',
           ),
-          const SizedBox(
-            height: 10.0,
+        ),
+        SizedBox(
+          height: 3.0.h,
+        ),
+        Text(
+          'What would you like to play?',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Montserrat',
           ),
-          Text(
-            'What would you like to play?',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: getProportionateScreenWidth(19),
-              fontWeight: FontWeight.w700,
-              fontFamily: 'Montserrat',
-            ),
-          ),
-          const SizedBox(
-            height: 30.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              SearchField(),
-              FavoriteBtn(),
-            ],
-          ),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 24.0.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: const [
+            SearchField(),
+            FavoriteBtn(),
+          ],
+        ),
+      ],
     );
   }
 }
